@@ -1,0 +1,7 @@
+﻿CREATE TABLE [dbo].[Subscriber]
+(
+	[Id] INT PRIMARY KEY IDENTITY (1,1) NOT NULL,
+	[FullName] NVARCHAR (450) NOT NULL,
+	[Gender] NVARCHAR (128) NOT NULL,
+	[BirthYear] DATETIME NOT NULL,
+)
