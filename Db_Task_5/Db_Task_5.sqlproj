@@ -65,6 +65,7 @@
     <Build Include="Tables\Genre.sql" />
     <Build Include="Tables\Book.sql" />
     <Build Include="Tables\Subscriber.sql" />
+    <Build Include="Tables\History.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="PostDeployment\Script.PostDeployment.sql" />
