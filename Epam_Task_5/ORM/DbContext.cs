@@ -11,8 +11,20 @@ namespace Epam_Task_5.ORM
         protected SqlConnection _sqlConnection;
         public DbContext()
         {
-            _connectionString = @"";
+            _connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Epam_Task_5_DB;Integrated Security=True";
             _sqlConnection = new SqlConnection(_connectionString);
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is DbContext context &&
+                   _connectionString == context._connectionString &&
+                   EqualityComparer<SqlConnection>.Default.Equals(_sqlConnection, context._sqlConnection);
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(_connectionString, _sqlConnection);
         }
     }
 }
