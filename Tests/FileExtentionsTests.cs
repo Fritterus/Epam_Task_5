@@ -54,7 +54,7 @@ namespace Tests
         }
 
         [Test]
-        public void Test_WritePopularGenreInTxtFile()
+        public void Test_WriteAnyPopularInTxtFile()
         {
             string filePath = @"..\..\..\..\Epam_Task_5\Resources\AnyPopularList.txt";
 
@@ -77,6 +77,30 @@ namespace Tests
             textFromFile.Should().NotBeEmpty();
         }
 
+        [Test]
+        public void Test_WriteAnyPopularInPdfFile()
+        {
+            string directoryPath = @"..\..\..\..\Epam_Task_5\Resources";
+            string filePath = @"..\..\..\..\Epam_Task_5\Resources\AnyPopularList.pdf";
 
+            FileExtentions.WriteAnyPopularInPdfFile(directoryPath);
+
+            string textFromFile = File.ReadAllText(filePath);
+
+            textFromFile.Should().NotBeEmpty();
+        }
+
+        [Test]
+        public void Test_WriteBorrowedBooksInPdfFile()
+        {
+            string directoryPath = @"..\..\..\..\Epam_Task_5\Resources";
+            string filePath = @"..\..\..\..\Epam_Task_5\Resources\BorrowedBookList.pdf";
+
+            FileExtentions.WriteBorrowedBooksInPdfFile(directoryPath);
+
+            string textFromFile = File.ReadAllText(filePath);
+
+            textFromFile.Should().NotBeEmpty();
+        }
     }
 }
