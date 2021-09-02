@@ -103,5 +103,20 @@ namespace Epam_Task_5.Reports
             return quantityBorrowedBooks;
         }
 
+        public static List<Book> GetShabbyBookList(List<Book> books, List<History> histories)
+        {
+            var shabbyBooks = new List<Book>();
+
+            for (int i = 0; i < histories.Count(); i++)
+            {
+                if (histories[i].BookCondition == "Shabby")
+                {
+                    shabbyBooks.Add(books.First(o => o.Id == histories[i].BookId));
+                }
+            }
+
+            return shabbyBooks;
+        }
+
     }
 }
