@@ -23,7 +23,7 @@ namespace Epam_Task_5.CRUD
 
         public void Create(T obj)
         {
-            string sqlInsertCommand = $"INSERT INFO [{typeof(T).Name}] (";
+            string sqlInsertCommand = $"SET IDENTITY_INSERT [{typeof(T).Name}] ON; INSERT INTO [{typeof(T).Name}] (";
 
             List<PropertyInfo> propertyColumns = _properties.Where(property => !property.PropertyType.IsClass || property.PropertyType == typeof(string)).ToList();
 
@@ -34,6 +34,7 @@ namespace Epam_Task_5.CRUD
             sqlInsertCommand += string.Join(",", propertyColumns.Select(property => $"@{property.Name}"));
 
             sqlInsertCommand += ");";
+            sqlInsertCommand += $"SET IDENTITY_INSERT [{typeof(T).Name}] OFF;";
 
             var sqlCommand = new SqlCommand(sqlInsertCommand, _sqlConnection);
 
@@ -52,10 +53,10 @@ namespace Epam_Task_5.CRUD
             _sqlConnection.Open();
             object obj = null;
 
-            string sqlSelectCommand = $"SELECT * FROM [{typeof(T).Name}] WHERE Id = @ID;";
+            string sqlSelectCommand = $"SELECT * FROM [{typeof(T).Name}] WHERE Id = @Id;";
             SqlCommand sqlCommand = new SqlCommand(sqlSelectCommand, _sqlConnection);
 
-            sqlCommand.Parameters.AddWithValue("@ID", $"{id}");
+            sqlCommand.Parameters.AddWithValue("@Id", $"{id}");
 
             SqlDataReader reader = sqlCommand.ExecuteReader();
 

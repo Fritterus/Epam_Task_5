@@ -11,7 +11,7 @@ namespace Epam_Task_5.ORM.Tables
     {
         public string FullName { get; set; }
         public string Gender { get; set; }
-        public DateTime BirthDate { get; set; }
+        public DateTime BirthYear { get; set; }
 
         /// <summary>
         /// Method for equal the current object with the specified object
@@ -25,7 +25,7 @@ namespace Epam_Task_5.ORM.Tables
                    Id == subscriber.Id &&
                    FullName == subscriber.FullName &&
                    Gender == subscriber.Gender &&
-                   BirthDate == subscriber.BirthDate;
+                   BirthYear == subscriber.BirthYear;
         }
 
         /// <summary>
@@ -34,7 +34,7 @@ namespace Epam_Task_5.ORM.Tables
         /// <returns>Hash code</returns>
         public override int GetHashCode()
         {
-            return HashCode.Combine(base.GetHashCode(), Id, FullName, Gender, BirthDate);
+            return HashCode.Combine(base.GetHashCode(), Id, FullName, Gender, BirthYear);
         }
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace Epam_Task_5.ORM.Tables
         {
             return base.ToString() + string.Format($"FullName {FullName}"
                                                    + $"Gender {Gender}"
-                                                   + $"BirthDate {BirthDate}");
+                                                   + $"BirthDate {BirthYear}");
         }
     }
 }

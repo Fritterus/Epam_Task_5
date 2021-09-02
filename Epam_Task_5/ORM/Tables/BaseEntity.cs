@@ -7,7 +7,7 @@ namespace Epam_Task_5.ORM.Tables
     /// <summary>
     /// Class describing base entity model
     /// </summary>
-    public class BaseEntity
+    public abstract class BaseEntity
     {
         public int Id { get; set; }
 

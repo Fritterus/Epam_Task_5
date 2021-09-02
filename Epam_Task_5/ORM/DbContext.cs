@@ -11,7 +11,7 @@ namespace Epam_Task_5.ORM
         protected SqlConnection _sqlConnection;
         public DbContext()
         {
-            _connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Epam_Task_5_DB;Integrated Security=True";
+            _connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Db_Task_5;Integrated Security=True";
             _sqlConnection = new SqlConnection(_connectionString);
         }
 
