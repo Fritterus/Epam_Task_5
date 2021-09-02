@@ -28,14 +28,14 @@ VALUES (N'Kardash Egor Vyacheslavovich', N'Male', CAST(N'2000-11-17' AS Date)),
 	   (N'Goncharuk Artem Gennadievich', N'Male', CAST(N'2000-07-13' AS Date)),
 	   (N'Kolocey Olga Valerievna', N'Female', CAST(N'1998-10-01' AS Date))
 
-INSERT [dbo].[History] ([ReceivingDate], [SubscriberId], [IsReturn], [BookCondition])
-VALUES (CAST(N'2021-04-04' AS Date), 2, 1, N'New'),
-	   (CAST(N'2021-04-07' AS Date), 4, 0, null),
-	   (CAST(N'2021-04-13' AS Date), 4, 0, null),
-	   (CAST(N'2021-05-17' AS Date), 3, 1, N'Shabby'),
-	   (CAST(N'2021-05-21' AS Date), 5, 0, null),
-	   (CAST(N'2021-05-27' AS Date), 5, 0, null),
-	   (CAST(N'2021-05-30' AS Date), 3, 0, null),
-	   (CAST(N'2021-06-03' AS Date), 4, 0, null),
-	   (CAST(N'2021-06-09' AS Date), 4, 0, null),
-	   (CAST(N'2021-06-11' AS Date), 1, 0, N'Shabby')
+INSERT [dbo].[History] ([ReceivingDate], [BookId], [SubscriberId], [IsReturn], [BookCondition])
+VALUES (CAST(N'2021-04-04' AS Date), 2, 2, 1, N'New'),
+	   (CAST(N'2021-04-07' AS Date), 1, 4, 0, null),
+	   (CAST(N'2021-04-13' AS Date), 2, 4, 0, N'New'),
+	   (CAST(N'2021-05-17' AS Date), 4, 3, 1, N'Shabby'),
+	   (CAST(N'2021-05-21' AS Date), 3, 5, 0, N'Shabby'),
+	   (CAST(N'2021-05-27' AS Date), 2, 5, 0, null),
+	   (CAST(N'2021-05-30' AS Date), 5, 3, 0, null),
+	   (CAST(N'2021-06-03' AS Date), 5, 4, 0, null),
+	   (CAST(N'2021-06-09' AS Date), 5, 4, 0, null),
+	   (CAST(N'2021-06-11' AS Date), 5, 1, 0, N'Shabby')

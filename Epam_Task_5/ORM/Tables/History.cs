@@ -10,6 +10,7 @@ namespace Epam_Task_5.ORM.Tables
     public class History : BaseEntity
     {
         public DateTime ReceivingDate { get; set; }
+        public int BookId { get; set; }
         public int SubscriberId { get; set; }
         public bool IsReturn { get; set; }
         public string BookCondition { get; set; }

@@ -69,6 +69,7 @@
     <Build Include="ForeignKeys\FK_Author_Book.sql" />
     <Build Include="ForeignKeys\FK_Genre_Book.sql" />
     <Build Include="ForeignKeys\FK_Subscriber_History.sql" />
+    <Build Include="ForeignKeys\FK_Book_History.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="PostDeployment\Script.PostDeployment.sql" />
