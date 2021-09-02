@@ -10,9 +10,18 @@ using System.Text;
 
 namespace Epam_Task_5.Reports
 {
+    /// <summary>
+    /// Class for work with file
+    /// </summary>
     public class FileExtentions
     {
-        public static void WritePopularGenreInXlsxFile(string filePath, TypeSort typeSort, int sortColumn)
+        /// <summary>
+        /// Method for write any popular in excel file
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <param name="typeSort"></param>
+        /// <param name="sortColumn"></param>
+        public static void WriteAnyPopularInXlsxFile(string filePath, TypeSort typeSort, int sortColumn)
         {
             int leftBoard = 1;
             int rightBoard = 3;
@@ -54,6 +63,12 @@ namespace Epam_Task_5.Reports
             excelPackage.SaveAs(file);
         }
 
+        /// <summary>
+        /// Method for write quantity borrowed books in excel file
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <param name="typeSort"></param>
+        /// <param name="sortColumn"></param>
         public static void WriteBorrowedBooksInXlsxFile(string filePath, TypeSort typeSort, int sortColumn)
         {
             int leftBoard = 1;
@@ -93,6 +108,52 @@ namespace Epam_Task_5.Reports
 
             FileInfo file = new FileInfo(filePath);
             excelPackage.SaveAs(file);
+        }
+
+        /// <summary>
+        /// Method for write any popular in txt file
+        /// </summary>
+        /// <param name="filePath"></param>
+        public static void WriteAnyPopularInTxtFile(string filePath)
+        {
+            Database database = Database.Instance;
+            var books = database.Books.ToList();
+            var genres = database.Genres.ToList();
+            var authors = database.Authors.ToList();
+            var subscribers = database.Subscribers.ToList();
+            var histories = database.Histories.ToList();
+
+            var popularAuthorName = Report.GetMostPopularAuthor(books, authors).Name;
+            var subscriberFullName = Report.GetMostReadingSubscriber(histories, subscribers).FullName;
+            var popularGenreName = Report.GetPopularGenre(books, genres).Name;
+
+            using var streamWriter = new StreamWriter(filePath);
+            streamWriter.WriteLine("Popular Author\t\tSubscriber\t\t\t\t\t\t\t\tPopular Genre");
+            streamWriter.WriteLine($"{popularAuthorName}\t\t\t\t{subscriberFullName}\t\t\t{popularGenreName}");
+        }
+
+        /// <summary>
+        /// Method for write quantity borrowed books in txt file
+        /// </summary>
+        /// <param name="filePath"></param>
+        public static void WriteBorrowedBooksInTxtFile(string filePath)
+        {
+            Database database = Database.Instance;
+            var books = database.Books.ToList();
+            var histories = database.Histories.ToList();
+
+            var quantityBorrowedBooks = Report.GetQuantityBorrowedBooks(books, histories).Values.ToArray();
+
+
+            using var streamWriter = new StreamWriter(filePath);
+            streamWriter.WriteLine("Book Name\t\tQuantity Borrowed");
+
+            for (int i = 0; i < books.Count(); i++)
+            {
+                streamWriter.Write(books[i].Name);
+                streamWriter.Write("\t\t\t\t");
+                streamWriter.WriteLine(quantityBorrowedBooks[i]);
+            }
         }
 
         /// <summary>
