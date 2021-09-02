@@ -6,6 +6,9 @@ using System.Text;
 
 namespace Epam_Task_5.ORM
 {
+    /// <summary>
+    /// Class for storing database table
+    /// </summary>
     public class Database : DbContext
     {
         private static Database _instance;
@@ -16,6 +19,9 @@ namespace Epam_Task_5.ORM
         public DbSet<Author> Authors { get; set; }
         public DbSet<History> Histories { get; set; }
 
+        /// <summary>
+        /// Constructor for initializes tables
+        /// </summary>
         private Database() :
             base()
         {

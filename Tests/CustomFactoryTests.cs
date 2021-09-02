@@ -6,11 +6,6 @@ namespace Tests
 {
     public class CustomFactoryTests
     {
-        [SetUp]
-        public void Setup()
-        {
-        }
-
         [Test]
         public void CreateModel_WhenTypeIsNotAbstract_ShouldReturnCorrectObject()
         {

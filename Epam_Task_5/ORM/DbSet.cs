@@ -10,12 +10,20 @@ using System.Reflection;
 
 namespace Epam_Task_5.ORM
 {
+    /// <summary>
+    /// Class for storing a table as a collection of objects
+    /// </summary>
+    /// <typeparam name="T">Class that inherits the class BaseEntity</typeparam>
     public class DbSet<T> : IEnumerable<T> where T : BaseEntity 
     {
         private BaseMethods<T> _baseMethods;
         private List<T> _listModel;
         private SqlConnection _sqlConnection;
 
+        /// <summary>
+        /// Constructor set up SqlConnection and reads the table into the collection of objects
+        /// </summary>
+        /// <param name="sqlConnection"></param>
         public DbSet(SqlConnection sqlConnection)
         {
             _sqlConnection = sqlConnection ?? throw new Exception($"{nameof(SqlConnection)} cannot be null.");
@@ -23,12 +31,20 @@ namespace Epam_Task_5.ORM
             _listModel = ReadTable().ToList();
         }
 
+        /// <summary>
+        /// Method add an object to the objects collection and to the table
+        /// </summary>
+        /// <param name="item"></param>
         public void Add(T item)
         {
             _baseMethods.Create(item);
             _listModel.Add(item);
         }
 
+        /// <summary>
+        /// Method delete an object from the objects collection and from the table
+        /// </summary>
+        /// <param name="id"></param>
         public void Delete(int id)
         {
             _baseMethods.Delete(id);
@@ -37,6 +53,11 @@ namespace Epam_Task_5.ORM
             _listModel.Remove(deletedModel);
         }
 
+        /// <summary>
+        /// Method update an object in the objects collection and in the table
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="item"></param>
         public void Update(int id, T item)
         {
             _baseMethods.Update(id, item);
@@ -45,6 +66,11 @@ namespace Epam_Task_5.ORM
             updatedModel = item;
         }
 
+        /// <summary>
+        /// Method read an object from the objects collection
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public T Read(int id) => _listModel.FirstOrDefault(o => o.Id == id);
 
         public IEnumerator<T> GetEnumerator() => _listModel.GetEnumerator();
@@ -54,7 +80,10 @@ namespace Epam_Task_5.ORM
             return GetEnumerator();
         }
 
-
+        /// <summary>
+        /// Method read a table from a database
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<T> ReadTable()
         {
             _sqlConnection.Open();

@@ -10,17 +10,29 @@ using Epam_Task_5.Factory;
 
 namespace Epam_Task_5.CRUD
 {
+    /// <summary>
+    /// Class for working with database
+    /// </summary>
+    /// <typeparam name="T">Class that inherits class BaseEntity</typeparam>
     public class BaseMethods<T> : IBaseMethods<T> where T : BaseEntity
     {
         private SqlConnection _sqlConnection;
         private List<PropertyInfo> _properties;
 
+        /// <summary>
+        /// Constructor for initializes SqlConnection and set class properties
+        /// </summary>
+        /// <param name="sqlConnection"></param>
         public BaseMethods(SqlConnection sqlConnection)
         {
             _sqlConnection = sqlConnection;
             _properties = typeof(T).GetProperties().ToList();
         }
 
+        /// <summary>
+        /// Method create object into database table
+        /// </summary>
+        /// <param name="obj">Object that inherits class BaseEntity</param>
         public void Create(T obj)
         {
             string sqlInsertCommand = $"SET IDENTITY_INSERT [{typeof(T).Name}] ON; INSERT INTO [{typeof(T).Name}] (";
@@ -48,6 +60,11 @@ namespace Epam_Task_5.CRUD
             _sqlConnection.Close();
         }
 
+        /// <summary>
+        /// Method search object from database table by id
+        /// </summary>
+        /// <param name="id">Object id</param>
+        /// <returns></returns>
         public T Read(int id)
         {
             _sqlConnection.Open();
@@ -80,6 +97,11 @@ namespace Epam_Task_5.CRUD
             return (T)obj;
         }
 
+        /// <summary>
+        /// Method update object that locates into database table
+        /// </summary>
+        /// <param name="id">Object id</param>
+        /// <param name="obj">Object that inherits class BaseEntity</param>
         public void Update(int id, T obj)
         {
             string sqlUpdateCommand = $"UPDATE [{typeof(T).Name}] SET ";
@@ -106,6 +128,10 @@ namespace Epam_Task_5.CRUD
             _sqlConnection.Close();
         }
 
+        /// <summary>
+        /// Method delete object from database table
+        /// </summary>
+        /// <param name="id">Object id</param>
         public void Delete(int id)
         {
             string sqlDeleteCommand = $"DELETE FROM [{typeof(T).Name}] WHERE ID = @ID;";
